@@ -28,7 +28,7 @@ $app->get('/cowsay', function() use($app) {
 });
 
 $app->get('/test', function() use($app) {
-		$json = json_encode($array('test' => 'foo', 'test2' => 'bar'));
+		$json = json_encode(array('test' => 'foo', 'test2' => 'bar'));
 		return $json;
 });
 
