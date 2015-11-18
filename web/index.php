@@ -27,7 +27,7 @@ $app->get('/cowsay', function() use($app) {
 		    return "<pre>".\League\Cowsayphp\Cow::say("Cool beans")."</pre>";
 });
 
-$app->get('/test', function() user($app) {
+$app->get('/test', function() use($app) {
 		$json = json_encode($array('test' => 'foo', 'test2' => 'bar'));
 		return $json;
 });
