@@ -1,21 +1,21 @@
 # heroku_php_sample
 
 * 環境  
-[heroku](http://heroku.com/home)
+[Heroku](http://heroku.com/home)
 * 言語  
 php
 * phpパッケージ管理  
-composer
+[composer](http://getcomposer.org/) ※ 先に入れておく
 * フレームワーク  
  [Slim](http://docs.slimframework.com/)
 * ログ  
-papertrail add-on
+papertrail add-on ※ Heroku上でセットアップ
 
 参考:[Getting Started with PHP on Heroku](https://devcenter.heroku.com/articles/getting-started-with-php) 
 
 ## Deploying
 
-herokuコマンドを使うので先に [Heroku Toolbelt](https://toolbelt.heroku.com/) を入れておく。
+herokuコマンドを使うので先に [Heroku Toolbelt](https://toolbelt.heroku.com/) を入れておき`$ heroku login`する。
 
 ### 新しいherokuアプリとして開くとき
 
