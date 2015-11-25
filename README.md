@@ -1,19 +1,90 @@
-# php-getting-started
+# heroku_php_sample
 
-A barebones PHP app that makes use of the [Silex](http://silex.sensiolabs.org/) web framework, which can easily be deployed to Heroku.
+* 環境  
+[heroku](http://heroku.com/home)
+* 言語  
+php
+* phpパッケージ管理  
+composer
+* フレームワーク  
+ [Slim](http://docs.slimframework.com/)
+* ログ  
+papertrail add-on
 
-This application supports the [Getting Started with PHP on Heroku](https://devcenter.heroku.com/articles/getting-started-with-php) article - check it out.
+参考:[Getting Started with PHP on Heroku](https://devcenter.heroku.com/articles/getting-started-with-php) 
 
 ## Deploying
 
-Install the [Heroku Toolbelt](https://toolbelt.heroku.com/).
+herokuコマンドを使うので先に [Heroku Toolbelt](https://toolbelt.heroku.com/) を入れておく。
+
+### 新しいherokuアプリとして開くとき
+
+リモートリポジトリは以下のようになる
+* origin  
+git@github.com:uzura/heroku_php_sample.git
+* heroku  
+https://git.heroku.com/{新しく作られる}.git
+
+※pushはherokuに対して行う
 
 ```sh
-$ git clone git@github.com:heroku/php-getting-started.git # or clone your own fork
-$ cd php-getting-started
+# ソースをクローン
+$ git clone git@github.com:uzura/heroku_php_sample.git
+$ cd heroku_php_sample
+
+# herokuに登録
 $ heroku create
 $ git push heroku master
+
+# 手元で確認するためビルトインサーバーを起動するとき
+# http://localhost:8000/hello/test で開く
+$ composer install
+$ php -S localhost:8000 -t ./web
+
+# heroku上で動いているものを開くとき
 $ heroku open
+```
+
+### 既存herokuアプリ([aqueous-mountain-1793](https://dashboard.heroku.com/apps/aqueous-mountain-1793))として開くとき
+
+リモートリポジトリは以下のようになる
+* origin  
+git@github.com:uzura/heroku_php_sample.git
+* heroku  
+https://git.heroku.com/aqueous-mountain-1793.git
+
+※originにpushするとherokuにデプロイされる設定なのでpushはoriginに対して行う。
+
+```sh
+# ソースをクローン
+$ git clone git@github.com:uzura/heroku_php_sample.git
+$ cd heroku_php_sample
+# herokuに紐付け
+$ heroku git:remote --app aqueous-mountain-1793
+
+# 手元で確認するためビルトインサーバーを起動するとき
+# http://localhost:8000/hello/test で開く
+$ composer install
+$ php -S localhost:8000 -t ./web
+
+# heroku上で動いているものを開くとき
+$ heroku open
+```
+
+## ログ確認
+* Chrome Loggerで確認する場合  
+ChromeにChrome Loggerを入れてアイコンクリックでONにする。
+デベロッパーツールのconsoleを開く
+
+* 標準エラー出力/標準出力で確認  
+heroku上で動いている場合。ビルトインサーバーの場合は何もしなくて良い。
+```sh
+$ heroku logs -t
+```
+
+* papertrailで確認する  
+```sh
+$ heroku addons:open papertrail
 ```
 
 ## Documentation
