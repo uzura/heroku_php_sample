@@ -8,6 +8,8 @@ php
 [composer](http://getcomposer.org/) ※ 先に入れておく
 * フレームワーク  
  [Slim](http://docs.slimframework.com/)
+* ストレージ  
+ClearDB MySql
 * ログ  
 papertrail add-on ※ [Heroku上でセットアップ](https://devcenter.heroku.com/articles/getting-started-with-php#provision-add-ons)
 
@@ -36,6 +38,13 @@ $ cd heroku_php_sample
 $ heroku create
 $ git push heroku master
 
+# heroku設定
+$ heroku addons:create papertrail
+$ heroku addons:create cleardb
+$ heroku config:set IS_HEROKU=true
+# 手元で動くように環境変数を.envにコピー
+$ heroku config:get CLEARDB_DATABASE_URL -s  >> .env
+
 # 手元で確認するためビルトインサーバーを起動するとき
 # http://localhost:8000/hello/test で開く
 $ composer install
@@ -61,6 +70,9 @@ $ git clone git@github.com:uzura/heroku_php_sample.git
 $ cd heroku_php_sample
 # herokuに紐付け
 $ heroku git:remote --app aqueous-mountain-1793
+
+# 手元で動くように環境変数を.envにコピー
+$ heroku config:get CLEARDB_DATABASE_URL -s  >> .env
 
 # 手元で確認するためビルトインサーバーを起動するとき
 # http://localhost:8000/hello/test で開く
