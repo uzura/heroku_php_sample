@@ -2,34 +2,12 @@
 
 require('../vendor/autoload.php');
 
-$app = new Silex\Application();
-$app['debug'] = true;
-
-// Register the monolog logging service
-$app->register(new Silex\Provider\MonologServiceProvider(), array(
-  'monolog.logfile' => 'php://stderr',
-));
-
-// Register view rendering
-$app->register(new Silex\Provider\TwigServiceProvider(), array(
-    'twig.path' => __DIR__.'/views',
-));
-
-// Our web handlers
-
-$app->get('/', function() use($app) {
-  $app['monolog']->addDebug('logging output.');
-  return $app['twig']->render('index.twig');
+$app = new \Slim\Slim();
+$app->get('/hello/:name', function ($name) {
+		    echo "Hello, $name";
+			$log = new Monolog\Logger('Logger');
+			$log->pushHandler(new Monolog\Handler\ChromePHPHandler()); // Chrome Loggerエクステンションで見るため
+			$log->pushHandler(new Monolog\Handler\StreamHandler('php://stderr', Monolog\Logger::DEBUG)); // $ heroku addons:open papertrailなどで見るため
+			$log->addDebug('Foo');
 });
-
-$app->get('/cowsay', function() use($app) {
-		  $app['monolog']->addDebug('cowsay');
-		    return "<pre>".\League\Cowsayphp\Cow::say("Cool beans")."</pre>";
-});
-
-$app->get('/test', function() use($app) {
-		$json = json_encode(array('test' => 'foo', 'test2' => 'bar'));
-		return $json;
-});
-
 $app->run();
