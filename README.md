@@ -9,7 +9,7 @@ php
 * フレームワーク  
  [Slim](http://docs.slimframework.com/)
 * ログ  
-papertrail add-on ※ Heroku上でセットアップ
+papertrail add-on ※ [Heroku上でセットアップ](https://devcenter.heroku.com/articles/getting-started-with-php#provision-add-ons)
 
 参考:[Getting Started with PHP on Heroku](https://devcenter.heroku.com/articles/getting-started-with-php) 
 
